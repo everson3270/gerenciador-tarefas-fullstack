@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1>📊 Gerenciador de Tarefas</h1>
+            <div class="nav-links">
+                <a href="dashboard.html">📈 Dashboard</a>
+                <a href="projetos.html">📁 Projetos</a>
+                <a href="tarefas.html">✅ Tarefas</a>
+                <a href="relatorio.html">📄 Relatórios</a>
+                <button onclick="logout()" class="btn btn-danger">Sair</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Gerar Relatórios</h1>
+        <p id="nomeUsuario" class="text-gray-600 mb-6">Olá, Usuário</p>
+
+        <div class="card mb-8">
+            <h2>📄 Relatório de Projeto em PDF</h2>
+            <p class="text-gray-600 mb-6">Selecione um projeto para gerar um relatório detalhado em PDF com informações de membros e tarefas.</p>
+
+            <div class="form-group">
+                <label for="selectProjeto">Selecione o Projeto</label>
+                <select id="selectProjeto">
+                    <option value="">Carregando projetos...</option>
+                </select>
+            </div>
+
+            <button onclick="gerarRelatorioPDF()" class="btn btn-primary w-full">
+                📥 Gerar Relatório em PDF
+            </button>
+        </div>
+
+        <!-- Seção de Relatórios Disponíveis -->
+        <div class="card">
+            <h2>📊 Relatórios Disponíveis</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="card">
+                    <h3>📈 Relatório de Tarefas por Status</h3>
+                    <p class="text-gray-600 text-sm mb-4">Visualize a distribuição de tarefas por status (A Fazer, Em Andamento, Concluída).</p>
+                    <button onclick="alert('Funcionalidade em desenvolvimento')" class="btn btn-primary w-full">
+                        Gerar
+                    </button>
+                </div>
+
+                <div class="card">
+                    <h3>⏰ Relatório de Tarefas Atrasadas</h3>
+                    <p class="text-gray-600 text-sm mb-4">Identifique todas as tarefas que estão atrasadas e seus responsáveis.</p>
+                    <button onclick="alert('Funcionalidade em desenvolvimento')" class="btn btn-primary w-full">
+                        Gerar
+                    </button>
+                </div>
+
+                <div class="card">
+                    <h3>👥 Relatório de Membros</h3>
+                    <p class="text-gray-600 text-sm mb-4">Lista completa de membros e seus projetos associados.</p>
+                    <button onclick="alert('Funcionalidade em desenvolvimento')" class="btn btn-primary w-full">
+                        Gerar
+                    </button>
+                </div>
+
+                <div class="card">
+                    <h3>📊 Relatório de Desempenho</h3>
+                    <p class="text-gray-600 text-sm mb-4">Análise de desempenho por projeto e membro.</p>
+                    <button onclick="alert('Funcionalidade em desenvolvimento')" class="btn btn-primary w-full">
+                        Gerar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+    <script type="module" src="relatorio.js"></script>
+</body>
+</html>

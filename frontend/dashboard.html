@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <span class="logo-icon">📊</span>
+                <h1>Gerenciador de Tarefas</h1>
+            </div>
+            <div class="nav-links">
+                <a href="dashboard.html">📈 Dashboard</a>
+                <a href="projetos.html">📁 Projetos</a>
+                <a href="tarefas.html">✅ Tarefas</a>
+                <a href="relatorio.html">📄 Relatórios</a>
+                <button onclick="logout()" class="btn-logout">Sair</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <h1>Dashboard</h1>
+            <p id="nomeUsuario" class="user-greeting">Olá, Usuário</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-info">
+                    <p class="stat-label">Total de Projetos</p>
+                    <p class="stat-value" id="totalProjetos">0</p>
+                </div>
+                <div class="stat-icon projects">📁</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-info">
+                    <p class="stat-label">Tarefas a Fazer</p>
+                    <p class="stat-value" id="tarefasAFazer">0</p>
+                </div>
+                <div class="stat-icon todo">📝</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-info">
+                    <p class="stat-label">Em Andamento</p>
+                    <p class="stat-value" id="tarefasEmAndamento">0</p>
+                </div>
+                <div class="stat-icon progress">⚡</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-info">
+                    <p class="stat-label">Concluídas</p>
+                    <p class="stat-value" id="tarefasConcluidas">0</p>
+                </div>
+                <div class="stat-icon completed">✅</div>
+            </div>
+        </div>
+
+        <!-- Alerts Section -->
+        <div class="alerts-section">
+            <div class="alert-box">
+                <div class="alert-header">
+                    <h3>⚠️ Tarefas Atrasadas</h3>
+                </div>
+                <div id="tarefasAtrasadas" class="alert-content">
+                    Carregando...
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <div class="alert-header">
+                    <h3>⏰ Próximas a Vencer</h3>
+                </div>
+                <div id="tarefasProximas" class="alert-content">
+                    Carregando...
+                </div>
+            </div>
+        </div>
+
+        <!-- Geometric Shapes -->
+        <div class="geometric-shape shape-1"></div>
+        <div class="geometric-shape shape-2"></div>
+        <div class="geometric-shape shape-3"></div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+    <script type="module" src="dashboard.js"></script>
+</body>
+</html>

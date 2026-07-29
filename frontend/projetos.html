@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1>📊 Gerenciador de Tarefas</h1>
+            <div class="nav-links">
+                <a href="dashboard.html">📈 Dashboard</a>
+                <a href="projetos.html">📁 Projetos</a>
+                <a href="tarefas.html">✅ Tarefas</a>
+                <a href="relatorio.html">📄 Relatórios</a>
+                <button onclick="logout()" class="btn btn-danger">Sair</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Projetos</h1>
+        <p id="nomeUsuario" class="text-gray-600 mb-6">Olá, Usuário</p>
+
+        <div class="mb-6">
+            <button onclick="abrirModalProjeto()" class="btn btn-primary">➕ Novo Projeto</button>
+        </div>
+
+                   <!-- ... (código anterior) ... -->
+
+            <div id="listaProjetos" class="grid grid-cols-3 gap-4">
+                <!-- O conteúdo aqui será gerado dinamicamente pelo JavaScript -->
+                <p class="text-gray-600 col-span-full">Carregando projetos...</p>
+            </div>
+        </div>
+
+        <!-- Modal de Projeto -->
+        <div id="modalProjeto" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="modalTitulo">Novo Projeto</h2>
+                <form id="formProjeto" class="mt-4">
+                    <div class="form-group">
+                        <label for="projetoNome">Nome do Projeto</label>
+                        <input type="text" id="projetoNome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projetoDescricao">Descrição</label>
+                        <textarea id="projetoDescricao"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projetoDataInicio">Data de Início</label>
+                        <input type="date" id="projetoDataInicio" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projetoDataFim">Data de Término</label>
+                        <input type="date" id="projetoDataFim" required>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <button type="submit" class="flex-1 btn btn-success">Salvar</button>
+                        <button type="button" onclick="fecharModalProjeto()" class="flex-1 btn btn-danger">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal de Membros -->
+        <div id="modalMembros" class="modal hidden">
+            <div class="modal-content">
+                <h2>Gerenciar Membros</h2>
+
+                <form id="formMembro" class="mt-4 mb-6">
+                    <div class="form-group">
+                        <label for="selectUsuarioMembro">Selecione um Usuário</label>
+                        <select id="selectUsuarioMembro" required>
+                            <option value="">Carregando...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="selectPapelMembro">Papel</label>
+                        <select id="selectPapelMembro" required>
+                            <option value="MEMBRO">Membro</option>
+                            <option value="LIDER">Líder</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-full">Adicionar Membro</button>
+                </form>
+
+                <h3 class="font-bold mb-3">Membros Atuais</h3>
+                <div id="listaMembros" class="mb-4">
+                    <p class="text-gray-600">Carregando membros...</p>
+                </div>
+
+                <button type="button" onclick="fecharModalMembros()" class="btn btn-danger w-full">Fechar</button>
+            </div>
+        </div>
+
+        <!-- Modal de Confirmação de Deleção -->
+        <div id="modalDeletar" class="modal hidden">
+            <div class="modal-content" style="width: 100%; max-width: 500px; padding: 2.5rem; text-align: center;">
+                <div style="font-size: 4rem; margin-bottom: 1rem; color: #ef4444;">⚠️</div>
+                <h2 style="font-size: 1.75rem; font-weight: 700; color: #1f2937; margin-bottom: 0.75rem;">Excluir Projeto?</h2>
+                <p style="color: #4b5563; font-size: 1rem; line-height: 1.5; margin-bottom: 2rem;">
+                    Esta ação não poderá ser desfeita. Todos os dados vinculados a este projeto serão perdidos permanentemente.
+                </p>
+
+                <div style="display: flex; gap: 1rem;">
+                    <button type="button" onclick="fecharModalDeletar()" class="btn btn-secondary" style="flex: 1; padding: 0.75rem; font-size: 1rem; font-weight: 600;">
+                        Cancelar
+                    </button>
+                    <button id="btnConfirmarDeletar" type="button" class="btn btn-danger" style="flex: 1; padding: 0.75rem; font-size: 1rem; font-weight: 600;">
+                        Sim, Deletar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="app.js"></script>
+        <script type="module" src="projetos.js"></script>
+    </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <!-- Header com Logo -->
+        <div class="login-header">
+            <div class="logo">
+                <span class="logo-icon">📊</span>
+            </div>
+            <h1>Gerenciador de Tarefas</h1>
+            <p class="tagline">Organize seus projetos e tarefas</p>
+        </div>
+
+                <!-- Card de Login -->
+        <div class="login-card" id="loginCard"> <!-- Adicionei o id="loginCard" aqui -->
+            <h2>Login</h2>
+
+            <!-- Mensagem de Erro/Sucesso -->
+            <div id="mensagemLogin" class="alert hidden"></div>
+
+            <!-- Formulário de Login -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">E-mail</label>
+                    <input 
+                        type="email" 
+                        id="loginEmail" 
+                        placeholder="seu@email.com" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="loginSenha">Senha</label>
+                    <input 
+                        type="password" 
+                        id="loginSenha" 
+                        placeholder="Sua senha" 
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn-login">Entrar</button>
+            </form>
+
+            <!-- Link para Cadastro -->
+            <div class="login-footer">
+                <p>Não tem conta? 
+                    <a href="#" onclick="mostrarCadastro(); return false;" class="link-cadastro">
+                        Cadastre-se aqui
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Card de Cadastro (Oculto) -->
+        <div id="cadastroCard" class="login-card hidden">
+            <h2>Criar Conta</h2>
+            <p class="subtitle">Preencha os dados abaixo</p>
+
+            <!-- Mensagem de Erro/Sucesso -->
+            <div id="mensagemCadastro" class="alert hidden"></div>
+
+            <!-- Formulário de Cadastro -->
+            <form id="cadastroForm">
+                <div class="form-group">
+                    <label for="cadastroNome">Nome Completo</label>
+                    <input 
+                        type="text" 
+                        id="cadastroNome" 
+                        placeholder="Seu nome completo" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="cadastroEmail">E-mail</label>
+                    <input 
+                        type="email" 
+                        id="cadastroEmail" 
+                        placeholder="seu@email.com" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="cadastroSenha">Senha (mín. 8 caracteres)</label>
+                    <input 
+                        type="password" 
+                        id="cadastroSenha" 
+                        placeholder="Mínimo 8 caracteres" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="cadastroConfirmaSenha">Confirmar Senha</label>
+                    <input 
+                        type="password" 
+                        id="cadastroConfirmaSenha" 
+                        placeholder="Confirme sua senha" 
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn-login">Cadastrar</button>
+            </form>
+
+            <!-- Link para Login -->
+            <div class="login-footer">
+                <p>Já tem conta? 
+                    <a href="#" onclick="mostrarLogin(); return false;" class="link-cadastro">
+                        Faça login aqui
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Formas Geométricas de Fundo -->
+        <div class="geometric-shape shape-1"></div>
+        <div class="geometric-shape shape-2"></div>
+        <div class="geometric-shape shape-3"></div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

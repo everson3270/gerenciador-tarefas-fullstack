@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarefas - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1>📊 Gerenciador de Tarefas</h1>
+            <div class="nav-links">
+                <a href="dashboard.html">📈 Dashboard</a>
+                <a href="projetos.html">📁 Projetos</a>
+                <a href="tarefas.html">✅ Tarefas</a>
+                <a href="relatorio.html">📄 Relatórios</a>
+                <button onclick="logout()" class="btn btn-danger">Sair</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Tarefas</h1>
+        <p id="nomeUsuario" class="text-gray-600 mb-6">Olá, Usuário</p>
+
+        <div class="mb-6">
+            <button onclick="abrirModalTarefa()" class="btn btn-primary">➕ Nova Tarefa</button>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filtros mb-6 flex flex-wrap gap-4">
+            <div class="form-group flex-1 min-w-[150px]">
+                <label for="filtroStatus" class="block text-sm font-medium text-gray-700 mb-1">Filtrar por Status</label>
+                <select id="filtroStatus" onchange="carregarTarefas()"
+                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none">
+                    <option value="">Todos</option>
+                    <option value="A Fazer">A Fazer</option>
+                    <option value="Em Andamento">Em Andamento</option>
+                    <option value="Concluída">Concluída</option>
+                </select>
+            </div>
+            <div class="form-group flex-1 min-w-[150px]">
+                <label for="filtroProjeto" class="block text-sm font-medium text-gray-700 mb-1">Filtrar por Projeto</label>
+                <select id="filtroProjeto" onchange="carregarTarefas()"
+                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none">
+                    <option value="">Todos</option>
+                    <!-- Projetos serão carregados via JS -->
+                </select>
+            </div>
+            <div class="form-group flex-1 min-w-[150px]">
+                <label for="filtroPrioridade" class="block text-sm font-medium text-gray-700 mb-1">Filtrar por Prioridade</label>
+                <select id="filtroPrioridade" onchange="carregarTarefas()"
+                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none">
+                    <option value="">Todos</option>
+                    <option value="Baixa">Baixa</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Alta">Alta</option>
+                    <option value="Urgente">Urgente</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Tabela de Tarefas -->
+        <div class="card overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Título</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Projeto</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Responsável</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prioridade</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vencimento</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="listaTarefas" class="bg-white divide-y divide-gray-200">
+                    <tr>
+                        <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">Carregando tarefas...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal de Nova/Editar Tarefa -->
+    <div id="modalTarefa" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modalTituloTarefa" class="text-2xl font-bold mb-4 text-gray-800">Nova Tarefa</h2>
+            <form id="formTarefa" class="mt-4">
+                <div class="form-group mb-4">
+                    <label for="tarefaTitulo" class="block text-sm font-medium text-gray-700 mb-1">Título</label>
+                    <input type="text" id="tarefaTitulo" required
+                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="tarefaDescricao" class="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
+                    <textarea id="tarefaDescricao" rows="3"
+                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="tarefaProjeto" class="block text-sm font-medium text-gray-700 mb-1">Projeto</label>
+                    <select id="tarefaProjeto" required
+                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none">
+                        <option value="">Selecione um projeto</option>
+                        <!-- Projetos serão carregados via JS -->
+                    </select>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="selectResponsavel" class="block text-sm font-medium text-gray-700 mb-1">Responsável</label>
+                    <select id="selectResponsavel" required
+                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none">
+                        <option value="">Selecione um responsável</option>
+                        <!-- Responsáveis serão carregados via JS -->
+                    </select>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="tarefaPrioridade" class="block text-sm font-medium text-gray-700 mb-1">Prioridade</label>
+                    <select id="tarefaPrioridade" required
+                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none">
+                        <option value="Baixa">Baixa</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Alta">Alta</option>
+                        <option value="Urgente">Urgente</option>
+                    </select>
+                </div>
+                <div class="form-group mb-6">
+                    <label for="tarefaDataVencimento" class="block text-sm font-medium text-gray-700 mb-1">Data de Vencimento</label>
+                    <input type="date" id="tarefaDataVencimento" required
+                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none">
+                </div>
+                <div class="flex justify-end gap-3">
+                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded transition">Salvar</button>
+                    <button type="button" onclick="fecharModalTarefa()" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded transition">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div id="modalConfirmacaoExclusao" class="modal hidden">
+        <div class="modal-content max-w-md">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Confirmar Exclusão</h2>
+            <p class="text-gray-700 mb-6">Tem certeza que deseja deletar esta tarefa? Esta ação não poderá ser desfeita.</p>
+            <div class="flex justify-end gap-3">
+                <button id="btnConfirmarExclusao" onclick="confirmarExclusaoTarefa()" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded transition">Sim, Deletar</button>
+                <button type="button" onclick="fecharModalConfirmacaoExclusao()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded transition">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+    <script type="module" src="tarefas.js"></script>
+</body>
+</html>

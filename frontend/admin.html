@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Administrador - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1>🔐 Painel de Administrador</h1>
+            <div class="nav-links">
+                <a href="admin.html">👥 Usuários</a>
+                <a href="dashboard.html">📈 Dashboard</a>
+                <button onclick="logout()" class="btn btn-danger">Sair</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Gerenciamento de Usuários</h1>
+        <p id="nomeUsuario" class="text-gray-600 mb-6">Olá, Administrador</p>
+
+        <div class="mb-6">
+            <button onclick="abrirModalUsuario()" class="btn btn-primary">➕ Novo Usuário</button>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filtros mb-6">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="form-group">
+                    <label for="filtroPerfil">Filtrar por Perfil</label>
+                    <select id="filtroPerfil" onchange="carregarUsuarios()">
+                        <option value="">Todos</option>
+                        <option value="Admin">Administrador</option>
+                        <option value="Gerente">Gerente de Projeto</option>
+                        <option value="Usuario">Usuário Comum</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="filtroStatus">Filtrar por Status</label>
+                    <select id="filtroStatus" onchange="carregarUsuarios()">
+                        <option value="">Todos</option>
+                        <option value="Ativo">Ativo</option>
+                        <option value="Inativo">Inativo</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabela de Usuários -->
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Perfil</th>
+                        <th>Status</th>
+                        <th>Data de Cadastro</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="listaUsuarios">
+                    <tr>
+                        <td colspan="6" class="text-center text-gray-600">Carregando usuários...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal de Usuário -->
+    <div id="modalUsuario" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modalTituloUsuario">Novo Usuário</h2>
+            <form id="formUsuario" class="mt-4">
+                <div class="form-group">
+                    <label for="usuarioNome">Nome Completo</label>
+                    <input type="text" id="usuarioNome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="usuarioEmail">E-mail</label>
+                    <input type="email" id="usuarioEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="usuarioPerfil">Perfil</label>
+                    <select id="usuarioPerfil" required>
+                        <option value="Usuario">Usuário Comum</option>
+                        <option value="Gerente">Gerente de Projeto</option>
+                        <option value="Admin">Administrador</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="usuarioStatus">Status</label>
+                    <select id="usuarioStatus" required>
+                        <option value="Ativo">Ativo</option>
+                        <option value="Inativo">Inativo</option>
+                    </select>
+                </div>
+
+                <div class="flex space-x-2">
+                    <button type="submit" class="flex-1 btn btn-success">Salvar</button>
+                    <button type="button" onclick="fecharModalUsuario()" class="flex-1 btn btn-danger">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+    <script type="module" src="admin.js"></script>
+</body>
+</html>
